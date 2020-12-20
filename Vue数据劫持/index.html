@@ -1,0 +1,27 @@
+<script>
+//Vue2.x 对象中单个属性监听
+//初步使用 只监听了对象中单个属性
+let obj = {
+    name:'codery',
+    type:'帅'
+}
+    let content = '大脸猫'
+Object.defineProperty(obj,'type',{
+    enumerable:true, //这个属性是否出现在for in 或者Object.keys()中
+    configurable:true,
+    get() {
+        console.log('获取type的方法')
+        return content
+    },
+    set(newVal) {
+        console.log(`设置type的值为:${newVal}`)
+        content = newVal
+    }
+})
+
+console.log(obj.type)
+obj.type = '沙皮狗'
+console.log(obj.type)
+
+
+</script>

@@ -1,0 +1,33 @@
+<script>
+    let student = {
+        name:'学生',
+        like() {
+            console.log(this)
+            console.log(this.name + '喜欢打篮球')
+        }
+    }
+    student.like()
+    let studentA = student.like
+    studentA() //这样执行等同于 window.studengA
+
+    //call apply bind
+    let studentB = {
+        name:'小王',
+        say() {
+            console.log(this.name + '喜欢打篮球')
+            for(let item of arguments){
+                console.log(this.name + '喜欢' + item)
+            }
+        }
+    }
+
+    let studentC = {
+        name:'老王',
+    }
+
+    let fn = function() {
+        console.log(this)
+    }.bind(studentC)
+
+ studentB.say.call(studentC,'乒乓球','羽毛球','rap')
+</script>

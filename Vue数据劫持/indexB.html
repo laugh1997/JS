@@ -1,0 +1,17 @@
+<script>
+    let arr = [1,2,3]
+    Array.prototype.newPush = function(val) {
+        console.log(this)
+        this.push(val)
+    }
+    arr.newPush(4)
+    
+    const arrayproto = Array.prototype
+    const newPropo = Object.create(arrayproto)
+    // console.log(newPropo)
+    const protoArr = ['push','splice','pop','shift','unshift',]
+    
+    protoArr.forEach(item =>{
+        console.log(arrayproto[item])
+    })
+</script>
