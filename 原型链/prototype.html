@@ -1,3 +1,34 @@
 <script>
-    let a = 1
+ /*
+    每个函数都有一个 prototype  原型  
+    每个对象都有一个 __proto__  原型链
+
+    关系:对象的__proto__保存这 创建这个对象的函数的构造函数的prototype
+
+ */
+
+ function student() {
+
+ }
+ const person = new student()
+ console.log(person.__proto__ === student.prototype)
+
+ //对象的__proto__ 和函数的prototype都是一个对象 
+ console.log(student.prototype.__proto__) //原型链的最顶层是object.__proto__在往上__proto__就是null了
+
+ function teacher() {
+    this.name  = 1
+    this.age = 21
+ }
+
+ const person1 = new teacher()
+ teacher.prototype.age = 20     //因为person1对象的__proto__指向了tearcher.prototype所以如果当person自身没有age属性的时候就回去他的__proto__上面找,因为person1的__poroto__中保存着teacher.prototype所以会被访问到 这就是原型链
+ Object.prototype.height = 182
+ console.log(person1)
+
+
+ //Object.hasOwnProperty()之检查自身有没有这个属性 不会去原型链上查找 
+ // 'attribute' in object  这种方法同时还会去检查原型链上有没有这个属性
+console.log(person1.hasOwnProperty(height))
+console.log('height' in person1)
 </script>
