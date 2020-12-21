@@ -1,0 +1,25 @@
+<script>
+    ({} + {}).length
+        /*
+            结果为30
+            Tip1: 对象+对象 默认对调用对象的toString()方法  {}.toString = [Object object] 长度为15的字符串 
+            所以 {} +{} = 15 +15 = 30
+            Tip:如果单独执行  {}.length = undifined 因为空对象中并没有length属性
+        */
+
+
+    ([] + []).length
+        /*
+            结果为0 
+            Tip: 因为 [].toString() = '' 所以 空+ 空 = 0
+        */
+
+
+    (()=>{}).length  
+        /*
+            结果为0
+            Tip:函数的长度是函数必须传入形参的数量 如果这个函数必须传如两个参数 那个这个函数的长度就是2
+        */
+
+       
+</script>
