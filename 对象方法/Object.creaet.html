@@ -1,0 +1,37 @@
+<script>
+
+    /*
+        第一个参数 创建一个对象 并将这个对象作为创建出来的对象的原型  这里创建的对象是没有原型的 因为创建的是null
+    */
+    let test = Object.create(null)
+
+    /*
+        第二个参数 给创建出来的对象添加属性 以对象的方式 
+    */
+    let test1 = Object.create({name:1},{
+        age:{
+            value: 23,
+            configurable:true,  //可配置 (删除)
+            writable:true,  //可修改
+            enumerable:true   //可枚举
+        },
+        height:{
+            value:182,
+        }
+    })
+    // delete test1.age
+    test1.height = 183
+    console.log(test1)
+
+
+    /*
+        这里将test1拷贝给test2  结果中可以看到 test1第二个参数配置的属性 如果设置了configuarble:true
+        才可以将属性拷贝过去
+
+        并且 test1原型上的属性是不会被拷贝的
+
+        一但对象把属拷贝给了新的对象 ,它的配置项不会被拷贝, 因为Object.assign()只拷贝对象的属性 不会拷贝对象的配置
+    */
+    let test2 = Object.assign({},test1)
+    console.log(test2)
+</script>

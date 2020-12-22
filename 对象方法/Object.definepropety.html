@@ -1,0 +1,14 @@
+<script>
+
+    const test2 = Object.defineProperty({},'a',{
+        configurable:false,
+        enumerable:true,
+        writable:false,
+        value:5
+    })
+
+    //如果对上面对象的a属性进行赋值 就会报错  因为a属性是不可配置的
+    let test3 = Object.assign(test2,{b:2},{b:3,c:5})
+    console.log(test3)
+    console.log(test2)
+</script>
