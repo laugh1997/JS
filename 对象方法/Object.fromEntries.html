@@ -1,0 +1,39 @@
+<script>
+    /*
+        Object.fromEnties() 是 Object.entries()的反向应用 
+        Tip1:Objce.entries()是将 对象转为可迭代的二维数组  而Object.fromEntries()是将前者转换出来的
+        数组再转为对象 但这个对象与元对象不相等
+    */
+
+    const test = {
+        a: 1,
+        b: 2
+    }
+    const newTest = Object.entries(test) //转为二维数组
+    console.log(newTest)
+    const newTest1 = Object.fromEntries(newTest) // 又转为对象了
+    console.log(newTest1)
+    console.log(newTest1 == test) //与原对象不相等
+
+
+    /*
+         手写Object.fromEntries()
+         Tip1:首先我们知道 Object,fromEntries()方法是传入一个数组或Map对象 将其转为普通对象
+         Tip2:这里我们接收一个参数 
+    */
+    function myFromEntries(param) {
+        var _pool = {}
+        console.log(Object.prototype.toString.call(param))
+        if (Object.prototype.toString.call(param) !== '[object Array]' && Object.prototype.toString.call(param) !=='[object Map]') {
+              throw TypeError('参数类型错误')
+        } else {
+            for (let item of param) {
+                _pool[item[0]] = item[1]
+            }
+        }
+        return _pool
+    }
+    Object.prototype.myFromEntries = myFromEntries
+    let res = Object.myFromEntries(newTest)
+    console.log(res, 'res')
+</script>

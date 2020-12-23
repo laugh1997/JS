@@ -1,0 +1,55 @@
+<script>
+    function test() {
+        this.a =1
+        this.b = 2
+    }
+    test.prototype.c = 5
+    let test1 = new test()
+
+    /*
+        Object.entries() 将对象转为可迭代的 二维数组
+    */
+    let test2 = Object.entries(test1)
+
+    for(let [k,y] of test2){
+        console.log(k,y)
+    }
+    console.log(test2)
+    
+    const obj = {}
+    Object.defineProperties(obj,{
+        a:{
+            value:5,
+        },
+        b:{
+            value:7,
+        }
+    })
+    let test3 = Object.entries(obj)
+    console.log(test3)  //这里test3是个空对象 原因是 a b 默认是不可枚举的
+
+    let map = new Map(test2)    //因为test2是可迭代的二维数组 可以放在map中使用
+    console.log(map)
+
+    /*
+        手写Onject.entries实现
+        Tip1: 首先明确entries的用法 需要接收一个对象作为参数 如果参数不是对象返回空数组
+        Tip2: 参数为对象 将对象的key:value放在一个数组中 在push到需要返回的数组中 (二维数组)
+    */
+    function Myentries(obj) {
+        var _pool = []
+        if (Object.prototype.toString.call(obj) == '[object Object]') {
+            for(let k in obj) {
+                if (Object.hasOwnProperty.call(obj,k)) {
+                    var _arr = [k,obj[k]]
+                    _pool.push(_arr)
+                }
+            } 
+        }
+        return _pool
+    }
+    Object.prototype.Myentries = Myentries  //将手写的方法添加到Object原型上
+    const student = {name:'vueJs',age:4}
+    const myentries = Object.Myentries(student)
+    console.log(myentries)
+</script>
