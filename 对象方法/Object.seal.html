@@ -1,0 +1,82 @@
+<script>
+    // 'use strict' //这里开启严格模式 添加和删除封闭对象的属性 会报错
+    /*
+       Object.sear() 封闭对象
+       Tip1: 作用  1.被封闭的对象属性是可读的 2.被封闭的对象属性值是可以修改的
+                   3.被封闭的对象不可以删除属性和添加属性 (如果再严格模式下会报错 'use strict')
+    */
+
+    const obj = {
+        a: 1,
+        b: 2
+    }
+    let newObj = Object.seal(obj)
+    console.log(obj === newObj) //true 说明返回的对象跟源对象是同一个引用
+
+    const obj1 = newObj.a
+    console.log(obj1) //可读
+
+    newObj.a = 3
+    console.log(newObj) //可修改的
+
+    newObj.c = 5
+    console.log(newObj) //不可添加属性 严格模式下会报错
+
+    delete newObj.a
+    console.log(newObj) //不可删除属性 严格模式下会报错
+
+
+    //============================================================
+    //Object.seal() 默认不是深度密封对象 只对第一层进行密封 嵌套的对象不会被密封
+    const test = {
+        a: {
+            b: 1,
+            c: {
+                d: 2,
+                e: {
+                    f: 3
+                }
+            }
+        }
+    }
+
+     Object.seal(test)
+     test.a.b = 3
+     console.log(test)  //可修改
+
+     test.a.d = 5
+     console.log(test)  //可扩展
+
+     delete test.a.c
+     console.log(test)  //可删除
+
+
+   //=============利用递归方式 手写一个可以深度密封对象的object.seal()
+   Object.deepSeal = function(obj) {
+       var keys = Object.getOwnPropertyNames(obj) //获取对象所有的key ->数组形式
+       if (keys.length) {
+        keys.forEach(item=>{
+           var _val = obj[item]
+            if (typeof _val === 'object' && _val !== null) {
+                    Object.deepSeal(_val)
+            }
+        })
+       }
+    return Object.seal(obj)
+   }  
+   const newTest = {
+       name:{
+            width:5,
+            height:{
+                cool:true
+            }
+       },
+       age:2
+   }
+   let res = Object.deepSeal(newTest)
+   console.log(res)
+   delete res.name.height
+   console.log(res)
+   let arr =[1,2]
+   console.log()
+</script>
