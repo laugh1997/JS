@@ -1,0 +1,14 @@
+<script>
+    /*
+        Array.of() 将传入得参数放在一个数组中返回
+    */ 
+   console.log(Array.of(1,2,3)) //[1,2,3]
+
+   
+    //手写Array.of() 方法
+    Array.myArrOf = function(a){
+      var _pool = [...arguments]
+      return _pool
+    }
+    console.log(Array.myArrOf(1,2,3,4,5))
+</script>

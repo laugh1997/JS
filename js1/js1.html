@@ -1,0 +1,32 @@
+<script>
+    //递归   递归的含义就是函数自己调用自己 会生成一个执行队列(只有当满足条件 函数返回实际值了 再去执行队列) 
+    //递归慎用 生成执行队列等待执行会影响性能
+    // n! = n * (n-1)!
+    function fact(n) {
+        if (n ===1) {
+            return 1    //当这里满足条件返回实际值了 下面的队列才会执行 
+        }
+        return n * fact(n-1)    //这里生成队列 但不会执行
+    }
+    console.log(fact(5))
+
+    // fact(5) = 5 * fact(4)
+    // fact(4) = 4 * fact(3)
+    // fact(3) = 3 * fact(2)
+    // fact(2) = 2 * fact(1)    fact(1) = 1 根据执行队列向上推理可得120
+
+
+    //斐波那契额数列 递归算法  规则  n = (n-1) + (n-2)
+    function fb(n) {
+        if (n <=2) {
+            return 1 //出口 否则下面队列不会执行
+        }
+        return fb(n-1) + fb(n -2)
+    }
+
+    console.log(fb(5))
+    
+    // fb(5) = fb(4) + fb(3)
+    // fb(4) = fb(3) + fb(2)
+    // fb(3) = fb(2) + fb(1)   // 根据执行队列对算 fa(3) = 2   fb(4) = 3  fb(5) = 5
+</script>
