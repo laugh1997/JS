@@ -1,0 +1,37 @@
+<script>
+    /*
+        当一个构造函数被new执行过程 ->
+        首先 当 new Car() 的时候 其实执行Car() 的时候就已经执行那个构造
+        函数了,new的作用是在构造函数中隐式的创建一个this对象 
+        this={}  当在构造函数内定义一个变量的时候 例如 this.name ='js'
+        那么这个name被放入了this对象中 变成 this={name:'js'} 可以通过
+        this.name来访问  最后这个构造函数将这个this对象隐式的返回
+        所以当var cars = new Car() 的时候 就等于把构造函数返回的this对象交给了一个
+        变量来保存 这个变量就等于构造函数返回的this 所以可以通过 cars.name
+        来访问构造函数中的变量
+    */
+    function Car(options) {
+        //this={        当执行new操作的时候 隐式生成的this对象
+        //    name:options.name
+        //    color:options.color    
+        // }
+        this.name = options.name
+        this.color = options.color
+
+        //return this    隐式返回   
+        /*
+        这里有个需要注意的地方
+        如果我主动返回一个值 如果这个值是基本类型那么构造
+        函数会忽略它 依然返回this对象 如果这个值是引用类型
+        那么这个构造函数会返回这个引用类型
+        */
+
+    }
+
+    const myCar = new Car({
+        name: 'benzid',
+        color: 'red'
+    })
+    console.log(myCar)
+    
+</script>

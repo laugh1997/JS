@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+       var ols = document.querySelectorAll('li')
+        for(var i =0;i<ols.length;i++){
+            (function(j){
+                ols[j].onclick = function(){
+                    console.log(j)
+                }
+            }(i))
+        }
+        var a = 'a'
+        console.log(a+'1')
+    </script>
+</body>
+</html>
+<script>
+   //匿名函数
+    (function(a,b){
+        console.log(a+b)
+    }(1,2))
+
+    let res = (function() {
+        return 2
+    }())
+    console.log(res)
+
+    function test(){
+        for(var i =0; i<10;i++){
+            (function(num){
+                console.log(num)
+            }(i))
+        }
+    }
+    test()
+    if ((function(){return false}())) {
+        console.log(1)
+    }
+    
+    function test1() {
+        var c = 0
+        function add(){
+            c++
+            console.log(c)
+        }
+        return add;
+    }
+    var test2 = test1()
+    test2()
+
+    function test3(){
+        var arr = ['张三','李四']
+        function addName(name){
+            arr.push(name)
+            console.log(arr)
+        }
+        function subName(name){
+            for(let i=0;i<arr.length;i++){
+                if (name === arr[i]) {
+                    arr.splice(i,1)
+                    console.log(arr)
+                }
+            }
+        }
+        return obser = {
+            add:addName,
+            sub:subName
+        }
+    }
+    var test4 = test3()
+    console.log(test4)
+    test4.add('王五')
+    test4.sub('张三')
+    
+    function Tearch() {
+        console.log(this)
+    }
+   var ca =  new Tearch()
+
+    function math(option){
+        this.total = Object.values(option)
+        this.number = 0
+        this.cfd = 1
+        this.add=function() {
+          for (let item of this.total) {
+            this.number+=item
+          }
+          console.log(this.number)
+        },
+        this.cf=function(){
+            for(const item of this.total){
+                this.cfd *= item
+            }
+            console.log(this.cfd)
+        }
+    }
+
+    var mad = new math({
+        a:1,
+        b:2,
+        c:3
+    })
+    mad.add()
+    mad.cf()
+
+    function Car(options){
+        this.name = options.name
+        this.color = options.color
+        this.pailiang = options.pailiang
+    }
+
+    var rollrise = new Car({
+        name:'劳斯莱斯',
+        color:'黑色',
+        pailiang:'40'
+    })
+    console.log(rollrise)
+
+    function People(options){
+        this.name=options.name,
+        this.age = options.age,
+        this.choose=function(names){
+           console.log(res)
+        } 
+    }
+    var person = new People({
+        name:"张三",
+        age:'24',
+    })
+    console.log(person)
+    person.choose()
+</script>
