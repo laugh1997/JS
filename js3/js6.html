@@ -1,0 +1,53 @@
+<script>
+    /*
+        原型于原型链   原型链最顶端是Object.prototype
+    */
+    function handPhone(){
+        this.color = 'red'
+    }
+    handPhone.prototype.name = 'Apple'
+    const handPh = new handPhone() //handPh的原型proto指向handPhone.prototype  
+    
+    console.log(handPhone.prototype) //构造函数的原型也是一个对象 也有自己的proto指向Oject.prototype
+
+    
+    /*
+        call apply
+    */
+    function test(){
+        this.name = 'vue'
+        this.age = 4
+        this.say = function(){
+            console.log('vue is insterning')
+        }
+    }
+    const obj = {person:'小明'}
+    test.call(obj)  //把test构造函数中的this指向了obj 所以obj中就可以访问test构造函数中的属性和方法
+    console.log(obj)
+
+    
+    /*
+        如果一个函数中使用另一个函数的方法
+    */
+    function comput(){
+        this.add = function(a,b){
+            console.log(a + b)
+        }
+        this.sub = function(a,b){
+            console.log(a -b)
+        }
+    }
+
+    function computed(){
+        //构造函数没执行时 this指向window 执行时this指向实例对象 所以comput中的this就指向实例对象 实例对象就可以访问comput中的方法
+        comput.call(this)
+        this.cheng = function(a,b){
+            console.log(a * b)
+        }
+        this.chu = function(a,b){
+            console.log(a / b)
+        }
+    }
+    const compute = new computed()
+    console.log(compute)
+</script>

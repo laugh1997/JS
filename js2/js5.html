@@ -1,6 +1,22 @@
 <script>
-    
-    var str = 'abc'
-    console.log(new String(str).length)
-    console.log(new String())
+
+    //两种方法找到字符串中每个元素在ASKII码中的位置
+
+    function AllAskll(str){
+        var total = null
+        for(let item of str) {
+            total += item.charCodeAt(0)
+        }
+        return total
+    }
+    console.log(AllAskll('abc'))
+
+    function test(str){
+        var arr = null
+        for(let i =0;i<str.length;i++){
+            arr += str[i].charCodeAt(0)
+        }
+        return arr
+    }
+    console.log(test('abc'))
 </script>
